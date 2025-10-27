@@ -1,0 +1,128 @@
+---
+financial_research:
+  description: Research {company_name} stock. Find current stock price, recent quarterly
+    earnings, P/E ratio, revenue growth, and recent market news. Use web search tools
+    to gather this financial data.
+  expected_output: 'Financial research report for {company_name} including: current
+    stock price, latest earnings data, key financial ratios (P/E, etc.), and recent
+    news affecting the stock.'
+  agent: financial_analyst
+technical_analysis:
+  description: Perform technical analysis on {company_name} stock. Search for chart
+    patterns, support/resistance levels, moving averages, and current trend direction.
+    Identify potential entry and exit price points.
+  expected_output: 'Technical analysis report for {company_name} showing: current
+    trend direction, key support/resistance levels, technical indicators, and suggested
+    entry/exit price points.'
+  agent: technical_analyst
+  context:
+  - financial_research
+ml_prediction_analysis:
+  description: Fetch real-time data from Alpha Vantage API for {company_name}, train
+    both LSTM and XGBoost models on historical price data, and generate comprehensive
+    daily predictions. Combine both model predictions using ensemble methods to provide
+    accurate forecasts with confidence scores and risk assessments.
+  expected_output: "\U0001F916 **ML Prediction Analysis**\n\n\U0001F4CA Company: {company_name}\n\U0001F570️
+    Analysis Date: [Current Date]\n\U0001F4B0 Current Price: $[price]\n\U0001F4C8
+    Historical Data: [X] days analyzed\n\n**LSTM Model Prediction:**\n\U0001F3AF 1-Day:
+    $[price] (±[confidence])\n\U0001F3AF 3-Day: $[price] (±[confidence])\n\U0001F3AF
+    7-Day: $[price] (±[confidence])\n\U0001F4CA LSTM Confidence: [X]%\n\n**XGBoost
+    Model Prediction:**\n\U0001F3AF 1-Day: $[price] (±[confidence])\n\U0001F3AF 3-Day:
+    $[price] (±[confidence])  \n\U0001F3AF 7-Day: $[price] (±[confidence])\n\U0001F4CA
+    XGBoost Confidence: [X]%\n\n**Ensemble Prediction (Combined):**\n\U0001F3AF Consensus
+    1-Day: $[price] (±[range])\n\U0001F3AF Consensus 7-Day: $[price] (±[range])\n\U0001F4CA
+    Model Agreement: [High/Medium/Low]\n\U0001F4CA Overall Confidence: [X]%\n\n**Trading
+    Signals:**\n\U0001F4A1 Recommendation: [BUY/SELL/HOLD]\n\U0001F4CA Risk Level:
+    [LOW/MEDIUM/HIGH]\n\U0001F4BC Position Size: [X]% of portfolio\n\U0001F3AF Entry
+    Price: $[price]\n\U0001F6D1 Stop Loss: $[price]\n\n⚠️ Note: ML predictions based
+    on historical patterns. Market conditions may vary."
+  agent: ml_data_scientist
+  context:
+  - financial_research
+short_term_price_prediction:
+  description: >
+    Provide a SHORT-TERM (1-7 days) price prediction for {company_name}.
+    
+    You MUST provide the following information in your response:
+    
+    1. Current Stock Price: State "Current Price: $XXX.XX"
+    2. 7-Day Price Range: State "Predicted Range: $XXX.XX - $XXX.XX" (minimum and maximum)
+    3. Trend Direction: State clearly if "Uptrend", "Downtrend", or "Neutral"
+    4. Confidence Level: State "High Confidence", "Medium Confidence", or "Low Confidence"
+    5. Trading Signal: State "Buy", "Hold", or "Sell"
+    6. Risk Level: State "High Risk", "Medium Risk", or "Low Risk"
+    7. Key Insight: Provide 1-2 sentences explaining the prediction
+    
+    IMPORTANT FORMAT EXAMPLE:
+    "Current Price: $182.64
+    Predicted Range: $175.00 - $190.00
+    Trend: Uptrend
+    Confidence: High Confidence
+    Signal: Buy
+    Risk: Medium Risk
+    Insight: Based on recent momentum and strong AI infrastructure demand, the stock shows bullish signals with RSI at 65 and MACD crossover indicating continued strength."
+    
+    Use real-time data and technical analysis to make your prediction.
+    
+  expected_output: >
+    A structured prediction containing:
+    - Current stock price
+    - 7-day price target range (min-max)
+    - Trend direction (Uptrend/Downtrend/Neutral)
+    - Confidence level (High/Medium/Low)
+    - Trading signal (Buy/Hold/Sell)
+    - Risk assessment (High/Medium/Low)
+    - Brief insight explaining the prediction
+    
+  agent: technical_analyst
+  context:
+  - financial_research
+  - technical_analysis
+technical_analysis_summary:
+  description: Provide comprehensive technical analysis for {company_name} including
+    chart patterns, indicators, support/resistance levels, and technical outlook.
+  expected_output: "\U0001F4CA Technical Summary for {company_name}\n- 50-day MA:
+    [Agent will research and fill moving average]\n- 200-day MA: [Agent will research
+    and fill moving average]\n- RSI (14): [Agent will calculate RSI and determine
+    Overbought / Oversold / Neutral]\n- MACD: [Agent will analyze MACD and determine
+    Bullish / Bearish]\n- Trend Strength: [Agent will assess: Weak / Moderate / Strong]\n\U0001F9ED
+    Technical Signal: [Agent will determine: Buy / Hold / Sell]\n\U0001F50D Insight:\n[Agent
+    will explain crossover patterns, trend analysis, and technical patterns found]"
+  agent: technical_analyst
+  context:
+  - financial_research
+  - technical_analysis
+investment_summary:
+  description: Create a comprehensive investment summary for {company_name} combining
+    fundamental and technical analysis to provide long-term investment guidance.
+  expected_output: "\U0001F4B0 AI Investment Suggestion for {company_name}\n\U0001F4C8
+    Overall Score: [Agent will calculate score]/100\n\U0001F9E9 Technical Rating:
+    [Agent will determine: Buy / Hold / Sell]\n\U0001F4BC Fundamental Rating: [Agent
+    will assess: Strong / Fair / Weak]\n\U0001F5DE️ Sentiment Rating: [Agent will
+    determine: Positive / Neutral / Negative]\n\U0001F3AF Final Recommendation: **[Agent
+    will provide: Buy / Hold / Sell]**\n\U0001F9E0 Reasoning:\n[Agent will provide
+    comprehensive analysis paragraph explaining the recommendation based on research
+    findings]\n⚠️ Disclaimer: This is not financial advice. Please conduct your own
+    research."
+  agent: investment_advisor
+  context:
+  - financial_research
+  - technical_analysis
+generate_menu_options:
+  description: Generate a simple menu of analysis options for {company_name} that
+    users can choose from in the Telegram chatbot. Do NOT perform any analysis - only
+    show the menu options.
+  expected_output: "\U0001F916 **Choose Your Analysis for {company_name}**\n\nPlease
+    select one of the following options:\n\n1️⃣ **Short-Term Price Prediction**\n
+    \  \U0001F4C8 Next 1-7 days price targets and trading signals\n\n2️⃣ **Technical
+    Analysis Summary** \n   \U0001F4CA Chart patterns, indicators, and support/resistance
+    levels\n\n3️⃣ **Investment Summary**\n   \U0001F4BC Long-term investment recommendation
+    and risk assessment\n\n4️⃣ **ML Prediction Analysis**\n   \U0001F916 Advanced
+    LSTM + XGBoost machine learning forecasts\n\nReply with the number (1, 2, 3, or
+    4) of your choice."
+  agent: investment_advisor
+  context:
+  - short_term_price_prediction
+  - technical_analysis_summary
+  - investment_summary
+  - ml_prediction_analysis

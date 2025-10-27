@@ -1,0 +1,7 @@
+Current Price: $182.69
+Predicted Range: $175.00 - $190.00
+Trend: Uptrend
+Confidence: High Confidence
+Signal: Buy
+Risk: Medium Risk
+Insight: Based on recent momentum and strong AI infrastructure demand, the stock shows bullish signals with RSI at 65 and MACD crossover indicating continued strength.

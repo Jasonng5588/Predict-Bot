@@ -1,0 +1,1 @@
+There is no historical price data available for NVIDIA (NVDA) using the Alpha Vantage API or Yahoo Finance. The latest search results indicate that NVIDIA's current price is around $182.64, but the API calls to fetch historical data have been unsuccessful due to errors such as "No quote data available for this symbol".
